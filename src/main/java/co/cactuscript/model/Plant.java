@@ -2,21 +2,23 @@ package co.cactuscript.model;
 
 public abstract class Plant {
     private Enum<PlantStatus> status = PlantStatus.HEALTHY;
-    private String name;
-    private String species;
-    private Integer age;
-    private Integer waterLevel;
-    private Integer temperature;
-    private Integer humidity;
-    private Integer lightLevel;
-    private Integer soilQuality;
-    private Integer health;
-    private Integer happiness;
+    public String name;
+    public String species;
+    public Integer age;
+    public Integer waterLevel;
+    public Integer temperature;
+    public Integer humidity;
+    public Integer lightLevel;
+    public Integer soilQuality;
+    public Integer health;
+    public Integer happiness;
     private double growthRate;
     private double waterDrainRate;
     private double temperatureRate;
     private double humidityRate;
     private double lightRate;
+
+    private int height;
 
     public Plant(String name, String species, Integer waterLevel, Integer temperature, Integer humidity, Integer lightLevel, Integer soilQuality, double growthRate, Integer health, Integer happiness,  double waterDrainRate, double temperatureRate, double humidityRate, double lightRate) {
         this.name = name;
