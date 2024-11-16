@@ -3,7 +3,8 @@ let run = document.getElementById("run")
 let ctx = canvas.getContext("2d")
 
 run.addEventListener("click", function() {
-    // get the code from the box and turn it into json to pass to the server
+    let codeBlocks = getTextInputCodeBlocks()
+    runCode(codeBlocks)
 })
 
 function drawPot() {
@@ -17,5 +18,32 @@ function setupCanvas() {
     canvas.height = targetHeight
     canvas.width = targetWidth
 }
+
+// used for code blocks that are not in the text input
+function getAllCodeBlocks() {
+    let codeBlocks = document.getElementsByClassName("code-block")
+    let codeBlockArray = []
+    for (let i = 0; i < codeBlocks.length; i++) {
+        codeBlockArray.push(codeBlocks[i].innerText)
+    }
+    return codeBlockArray
+}
+
+function getTextInputCodeBlocks() {
+    let textCodeInput = document.getElementById("code-console")
+    return textCodeInput.split(" ")
+}
+
+function runCode(codeBlocks) {
+    let results = fetch("/code", {
+        method: "POST",
+        body: JSON.stringify(codeBlocks),
+        headers: {
+            "Content-type": "application/json; charset=UTF-8"
+        },
+    })
+    console.log(results)
+}
+
 
 setupCanvas()
