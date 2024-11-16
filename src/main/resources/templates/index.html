@@ -1,13 +1,21 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+<meta name="viewport" content="width = device-width, initial-scale = 1">
 <head th:replace="~{fragments/header :: header}">
 </head>
 <link rel="stylesheet" th:href="@{/css/style.css}">
 <title>cactuscript</title>
 
 <body>
-<h2 th:text="${message}"></h2>
-<canvas id="plant-canvas" width="" height="100" style="border:1px solid #000000;"></canvas>
+    <h2 th:text="${message}"></h2>
+    <div class="container" id="canvas-terminal-container">
+        <canvas id="plant-canvas" width="" height="100" style="border:1px solid #000000;"></canvas>
+
+        <div class="container" id="terminal-container">
+            <textarea name="terminal" id="terminal" cols="30" rows="10"></textarea>
+            <button type="button" name="run-command-button">Run</button>
+        </div>
+    </div>
 </body>
 
 <div th:replace="~{fragments/footer :: footer}"></div>
