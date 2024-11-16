@@ -9,5 +9,4 @@ public class CactuscriptApplication {
     public static void main(String[] args) {
         SpringApplication.run(CactuscriptApplication.class, args);
     }
-
 }

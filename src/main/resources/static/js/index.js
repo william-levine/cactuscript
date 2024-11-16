@@ -3,16 +3,24 @@ let terminal = document.getElementById("terminal")
 let runBtn = document.getElementById("run-command-button")
 let ctx = canvas.getContext("2d")
 
+let lastCodeRan = ""
 
-runBtn.addEventListener("click", function() {
+function run() {
     let codeBlocks = getTextInputCodeBlocks()
     runCode(codeBlocks)
-})
-
-function drawPot() {
-    ctx.fillStyle = "brown"
-
 }
+
+runBtn.addEventListener("click", run)
+
+terminal.addEventListener("input", function() {
+    // troll end
+    let endValue = "end"
+    let value = terminal.value.substring(terminal.value.length - endValue.length)
+    if (value === "end") {
+        run()
+        terminal.value += "\n> "
+    }
+})
 
 function setupCanvas() {
     let targetHeight = document.documentElement.clientHeight * 0.8
@@ -39,12 +47,17 @@ function getAllCodeBlocks() {
 }
 
 function getTextInputCodeBlocks() {
-    let codeInput = document.getElementById("terminal").value
+    let codeInput = terminal.value.substring(lastCodeRan.length + 2)
+    lastCodeRan = terminal.value + "\n"
+    console.log(lastCodeRan)
     console.log(codeInput)
-
     return codeInput.split(" ")
 }
 
+/**
+ *  Sends each individual word to the server to be validated and then ran
+  * @param codeBlocks - a list of strings that represent each individual word in the code
+ */
 function runCode(codeBlocks) {
     let results = fetch("/code", {
         method: "POST",
