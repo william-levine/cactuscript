@@ -1,9 +1,13 @@
+body {
+    font-family: "Courier New", sans-serif;
+    background: white;
+    color: black;
+}
+
 #canvas-terminal-container {
     display: grid;
     grid-template-columns: 3fr 2fr;
     grid-template-rows: 1fr;
-    place-items: center;
-
 }
 
 #terminal-container {
@@ -20,6 +24,7 @@
     padding: 5%;
     width: 100%;
     height: 90%;
+    font-family: "Courier New", sans-serif;
 }
 
 #terminal-container > #terminal:focus {
@@ -34,4 +39,8 @@
     width: 20%;
     height: 10%;
     float: right;
+}
+
+#terminal-container > button:hover {
+    background: grey;
 }

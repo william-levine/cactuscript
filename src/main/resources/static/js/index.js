@@ -1,14 +1,14 @@
 let canvas = document.getElementById("plant-canvas")
 let terminal = document.getElementById("terminal")
-//let run = document.getElementById("run")
+let runBtn = document.getElementById("run-command-button")
 let ctx = canvas.getContext("2d")
 
-/*
-run.addEventListener("click", function() {
+
+runBtn.addEventListener("click", function() {
     let codeBlocks = getTextInputCodeBlocks()
     runCode(codeBlocks)
 })
-*/
+
 function drawPot() {
     ctx.fillStyle = "brown"
 
@@ -39,8 +39,10 @@ function getAllCodeBlocks() {
 }
 
 function getTextInputCodeBlocks() {
-    let textCodeInput = document.getElementById("code-console")
-    return textCodeInput.split(" ")
+    let codeInput = document.getElementById("terminal").value
+    console.log(codeInput)
+
+    return codeInput.split(" ")
 }
 
 function runCode(codeBlocks) {
