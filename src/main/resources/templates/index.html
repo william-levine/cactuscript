@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/header :: header}">
+</head>
+<link rel="stylesheet" th:href="@{/css/style.css}">
+<title>cactuscript</title>
+
+<body>
+<h2 th:text="${message}"></h2>
+<canvas id="plant-canvas" width="" height="100" style="border:1px solid #000000;"></canvas>
+</body>
+
+<div th:replace="~{fragments/footer :: footer}"></div>
+<script th:src="@{js/index.js}"></script>
+</html>
