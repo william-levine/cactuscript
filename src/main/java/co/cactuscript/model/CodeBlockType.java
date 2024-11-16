@@ -14,7 +14,7 @@ public enum CodeBlockType {
     public static CodeBlockType called(String name) {
         if (name.equals("get") || name.equals("put")) {
             return COMMAND;
-        } else if (name.equals("stop")) {
+        } else if (name.equals("end")) {
             return STOP;
         } else if (CodeBlock.checkIfValidAttribute(name)) {
             return VARIABLE;
