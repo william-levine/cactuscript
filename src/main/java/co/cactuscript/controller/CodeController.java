@@ -13,11 +13,11 @@ import java.util.List;
 @RestController
 public class CodeController {
 
-
     @PostMapping("/code")
-    public ResponseEntity<String> runCode(@RequestBody List<String> codeStrings) {
+    public ResponseEntity<String> executeCommand(@RequestBody List<String> codeStrings) {
         try {
             List<CodeBlock> codeBlocks = CodeBlock.parseCode(codeStrings);
+            boolean success = CodeBlock.runCode();
         } catch (InvalidCodeStructureException | UnknownCodeBlockType e) {
             return ResponseEntity.status(400).body(e.getMessage());
         }
