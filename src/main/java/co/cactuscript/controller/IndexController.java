@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class IndexController {
     @GetMapping("/")
     public String home(Model model) {
-        String dynamicMessage = "Welcome!";
+        String dynamicMessage = "";
         model.addAttribute("message", dynamicMessage);
         return "index";
     }
