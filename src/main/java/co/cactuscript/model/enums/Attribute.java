@@ -1,7 +1,6 @@
 package co.cactuscript.model.enums;
 
 public enum Attribute {
-    NAME,
     AGE,
     WATER_LEVEL,
     TEMPERATURE,

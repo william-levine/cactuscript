@@ -1,5 +1,6 @@
 package co.cactuscript.controller;
 
+import co.cactuscript.model.Cactus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;

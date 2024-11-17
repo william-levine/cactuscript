@@ -58,6 +58,9 @@ public abstract class Tokeniser {
             }
         }
 
+        // Check for values
+//        if(token)
+
         // Fallback to unknown attribute
         throw new IllegalArgumentException("Unknown token: " + token);
     }
