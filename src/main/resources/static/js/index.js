@@ -1,8 +1,9 @@
-let canvas = document.getElementById("cactus-canvas")
-let terminal = document.getElementById("terminal")
-let ctx = canvas.getContext("2d")
+const canvas = document.getElementById("cactus-canvas")
+const terminal = document.getElementById("terminal")
+const ctx = canvas.getContext("2d")
 
 let lastCodeRan = "Terminal\n"
+let cactusData = {}
 
 function run() {
     let codeBlocks = getTextInputCodeBlocks()
@@ -37,11 +38,13 @@ function setupCanvas() {
     canvas.width = targetWidth
 }
 
-function setupTerminal() {
-    let targetHeight = document.documentElement.clientHeight / 2
-    let targetWidth = document.documentElement.clientWidth / 2
-    terminal.height = targetHeight
-    terminal.width = targetWidth
+function getInitialCactusState() {
+    fetch("/cactus", {
+        method: "GET",
+        headers: {
+            "Content-type": "application/json; charset=UTF-8"
+        },
+    }).then(response => response.json()).then(data => cactusData = data)
 }
 
 // used for code blocks that are not in the text input
@@ -80,12 +83,18 @@ function getRndInteger(min, max) {
 }
 
 function drawCactusPixel(x, y) {
-    ctx.strokeStyle = `rgb(0, ${getRndInteger(200, 232)}, 0)`;
-    ctx.lineWidth = "1";
-    ctx.beginPath();
-    ctx.moveTo(x, y);
-    ctx.lineTo(x + 1, y+1);
-    ctx.stroke();
+    if (canvas.getContext) {
+        ctx.fillStyle = `rgb(0, ${getRndInteger(200, 232)}, 0)`;
+        ctx.fillRect(x, y, 10, 10);
+    } else {
+        console.log("Canvas not supported")
+    }
 }
 
+function drawNewCactus() {
+
+}
+
+
+getInitialCactusState()
 setupCanvas()

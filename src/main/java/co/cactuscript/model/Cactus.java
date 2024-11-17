@@ -6,7 +6,7 @@ import java.util.Map;
 
 public class Cactus {
     private Enum<CactusStatus> status = CactusStatus.HEALTHY;
-    public String name;
+    private String name;
     public Integer age;
     public Integer waterLevel;
     public Integer temperature;
@@ -40,8 +40,8 @@ public class Cactus {
         this.lightRate = 0.5;
     }
 
-    public Cactus (String name, Integer age, Integer waterLevel, Integer temperature, Integer humidity, Integer lightLevel, Integer soilQuality, Integer health, Integer happiness) {
-        this.name = name == null ? "Cactus" : name;
+    public Cactus (Integer age, Integer waterLevel, Integer temperature, Integer humidity, Integer lightLevel, Integer soilQuality, Integer health, Integer happiness) {
+        this.name = "Cactus";
         this.age = age == null ? 0 : age;
         this.waterLevel = waterLevel == null ? 100 : waterLevel;
         this.temperature = temperature == null ? 25 : temperature;
@@ -86,9 +86,8 @@ public class Cactus {
         return attributes;
     }
 
-    public static Cactus fromSerialised(Map<String, Object> attributes) {
+    public static Cactus fromSerialised(Map<String, Integer> attributes) {
         return new Cactus(
-            (String) attributes.get("name"),
             (Integer) attributes.get("age"),
             (Integer) attributes.get("waterLevel"),
             (Integer) attributes.get("temperature"),
