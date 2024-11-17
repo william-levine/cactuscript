@@ -1,5 +1,9 @@
 package co.cactuscript.model;
 
+import java.lang.reflect.Field;
+import java.util.HashMap;
+import java.util.Map;
+
 public class Cactus {
     private Enum<CactusStatus> status = CactusStatus.HEALTHY;
     public String name;
@@ -11,7 +15,7 @@ public class Cactus {
     public Integer soilQuality;
     public Integer health;
     public Integer happiness;
-    private double growthRate;
+    private Double growthRate;
     private double waterDrainRate;
     private double temperatureRate;
     private double humidityRate;
@@ -36,7 +40,23 @@ public class Cactus {
         this.lightRate = 0.5;
     }
 
-    public Cactus (String name, String species, Integer waterLevel, Integer temperature, Integer humidity, Integer lightLevel, Integer soilQuality, double growthRate, Integer health, Integer happiness,  double waterDrainRate, double temperatureRate, double humidityRate, double lightRate) {
+    public Cactus (String name, Integer age, Integer waterLevel, Integer temperature, Integer humidity, Integer lightLevel, Integer soilQuality, Integer health, Integer happiness) {
+        this.name = name == null ? "Cactus" : name;
+        this.age = age == null ? 0 : age;
+        this.waterLevel = waterLevel == null ? 100 : waterLevel;
+        this.temperature = temperature == null ? 25 : temperature;
+        this.humidity = humidity == null ? 50 : humidity;
+        this.lightLevel = lightLevel == null ? 50 : lightLevel;
+        this.soilQuality = soilQuality == null ? 100 : soilQuality;
+        this.health = health == null ? 100 : health;
+        this.happiness = happiness == null ? 100 : happiness;
+        this.waterDrainRate = 0.5;
+        this.temperatureRate = 0.5;
+        this.humidityRate = 0.5;
+        this.lightRate = 0.5;
+    }
+
+    public Cactus (String name, Integer waterLevel, Integer temperature, Integer humidity, Integer lightLevel, Integer soilQuality, double growthRate, Integer health, Integer happiness,  double waterDrainRate, double temperatureRate, double humidityRate, double lightRate) {
         this.name = name;
         this.age = 0;
         this.waterLevel = waterLevel;
@@ -51,5 +71,32 @@ public class Cactus {
         this.temperatureRate = temperatureRate;
         this.humidityRate = humidityRate;
         this.lightRate = lightRate;
+    }
+
+    public Map<String, Object> serialise() throws RuntimeException {
+        Map<String, Object> attributes = new HashMap<>();
+        Field[] validFields = this.getClass().getFields();
+        for (Field field : validFields) {
+            try {
+                attributes.put(field.getName(), field.get(this));
+            } catch (IllegalAccessException | NullPointerException e) {
+                throw new RuntimeException("Failed to serialise cactus");
+            }
+        }
+        return attributes;
+    }
+
+    public static Cactus fromSerialised(Map<String, Object> attributes) {
+        return new Cactus(
+            (String) attributes.get("name"),
+            (Integer) attributes.get("age"),
+            (Integer) attributes.get("waterLevel"),
+            (Integer) attributes.get("temperature"),
+            (Integer) attributes.get("humidity"),
+            (Integer) attributes.get("lightLevel"),
+            (Integer) attributes.get("soilQuality"),
+            (Integer) attributes.get("health"),
+            (Integer) attributes.get("happiness")
+        );
     }
 }
