@@ -74,8 +74,10 @@ function runCode(codeBlocks) {
         headers: {
             "Content-type": "application/json; charset=UTF-8"
         },
+    }).then(response => response.json()).then(data =>
+    {
+      alert(data["response"])
     })
-    console.log(results)
 }
 
 function getRndInteger(min, max) {
