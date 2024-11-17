@@ -2,13 +2,19 @@ let canvas = document.getElementById("cactus-canvas")
 let terminal = document.getElementById("terminal")
 let ctx = canvas.getContext("2d")
 
-let lastCodeRan = ""
+let lastCodeRan = "Terminal\n"
 
 function run() {
     let codeBlocks = getTextInputCodeBlocks()
     terminal.value += "\n> "
     runCode(codeBlocks)
 }
+
+terminal.addEventListener("keydown", function(e) {
+    if([37, 38, 39, 40].indexOf(e.keyCode) > -1){
+        e.preventDefault();
+    }
+}, false);
 
 terminal.addEventListener("input", function(event) {
     if (event.inputType === "insertLineBreak"){
