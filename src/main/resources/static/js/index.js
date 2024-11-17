@@ -1,6 +1,5 @@
-let canvas = document.getElementById("plant-canvas")
+let canvas = document.getElementById("cactus-canvas")
 let terminal = document.getElementById("terminal")
-let runBtn = document.getElementById("run-command-button")
 let ctx = canvas.getContext("2d")
 
 let lastCodeRan = ""
@@ -10,8 +9,6 @@ function run() {
     terminal.value += "\n> "
     runCode(codeBlocks)
 }
-
-runBtn.addEventListener("click", run)
 
 terminal.addEventListener("input", function(event) {
     if (event.inputType === "insertLineBreak"){

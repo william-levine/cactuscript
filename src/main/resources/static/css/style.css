@@ -1,13 +1,20 @@
 body {
     font-family: "Courier New", sans-serif;
-    background: white;
-    color: black;
+    background: #111111;
+    color: white;
+    margin: 5%;
 }
 
 #canvas-terminal-container {
     display: grid;
     grid-template-columns: 3fr 2fr;
     grid-template-rows: 1fr;
+}
+
+#cactus-canvas {
+    width: 90%;
+    height: 90%;
+    border: 2px solid white;
 }
 
 #terminal-container {
@@ -17,30 +24,22 @@ body {
 
 #terminal-container > #terminal {
     box-sizing: border-box;
-    border: 2px solid black;
-    background: black;
+    /*border: 2px solid black;*/
+    border: none;
+    background: #111111;
     color: white;
     font-size: 2vw;
     padding: 5%;
     width: 100%;
-    height: 90%;
+    height: 100%;
     font-family: "Courier New", sans-serif;
+    resize: none;
 }
 
 #terminal-container > #terminal:focus {
     outline: none;
 }
 
-#terminal-container > button {
-    border: 2px solid black;
-    background: white;
-    color: black;
-    font-size: 1.5vw;
-    width: 20%;
-    height: 10%;
-    float: right;
-}
-
-#terminal-container > button:hover {
-    background: grey;
+header > h1 {
+    font-size: 50px;
 }
