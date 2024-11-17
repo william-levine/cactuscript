@@ -1,6 +1,6 @@
 package co.cactuscript.model;
 
-public enum PlantStatus {
+public enum CactusStatus {
     HEALTHY,
     THIRSTY,
     OVERWATERED,

@@ -9,16 +9,16 @@ import java.util.Arrays;
 import java.util.List;
 
 public class CodeBlock {
-    private final String code;
+    private final String token;
     private final CodeBlockType type;
 
-    private CodeBlock(String code) {
-        this.code = code;
-        this.type = CodeBlockType.called(code);
+    private CodeBlock(String token) {
+        this.token = token;
+        this.type = CodeBlockType.determineType(token);
     }
 
-    public String getCode() {
-        return code;
+    public String getToken() {
+        return token;
     }
 
     public CodeBlockType getType() {
@@ -30,7 +30,7 @@ public class CodeBlock {
         List<CodeBlockType> validNextTypes = new ArrayList<>(Arrays.asList(CodeBlockType.COMMAND, CodeBlockType.STOP));
         for (String codeString : code) {
             try {
-                CodeBlockType type = CodeBlockType.called(codeString);
+                CodeBlockType type = CodeBlockType.determineType(codeString);
                 if (validNextTypes.contains(type)) {
                     validNextTypes = CodeBlockType.getValidNextTypes(type);
                     codes.add(new CodeBlock(codeString));
@@ -52,6 +52,10 @@ public class CodeBlock {
                 return true;
             }
         }
+        return false;
+    }
+
+    public static boolean runCode() {
         return false;
     }
 }

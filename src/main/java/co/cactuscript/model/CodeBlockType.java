@@ -11,15 +11,15 @@ public enum CodeBlockType {
     VARIABLE,
     STOP;
 
-    public static CodeBlockType called(String name) {
-        if (name.equals("get") || name.equals("put")) {
+    public static CodeBlockType determineType (String token) {
+        if (token.equals("get") || token.equals("put")) {
             return COMMAND;
-        } else if (name.equals("end")) {
+        } else if (token.equals("stop")) {
             return STOP;
-        } else if (CodeBlock.checkIfValidAttribute(name)) {
+        } else if (CodeBlock.checkIfValidAttribute(token)) {
             return VARIABLE;
         } else {
-            throw new IllegalArgumentException("Unknown code block type: " + name);
+            throw new IllegalArgumentException("Unknown code block type: " + token);
         }
     }
 
