@@ -7,18 +7,23 @@ let lastCodeRan = ""
 
 function run() {
     let codeBlocks = getTextInputCodeBlocks()
+    terminal.value += "\n> "
     runCode(codeBlocks)
 }
 
 runBtn.addEventListener("click", run)
 
-terminal.addEventListener("input", function() {
-    // troll end
-    let endValue = "end"
-    let value = terminal.value.substring(terminal.value.length - endValue.length)
-    if (value === "end") {
+terminal.addEventListener("input", function(event) {
+    if (event.inputType === "insertLineBreak"){
+        terminal.value = terminal.value.substring(0, terminal.value.length - 1)
         run()
-        terminal.value += "\n> "
+    }
+    let endValue = "end"
+    let value = terminal.value.substring(terminal.value.length - endValue.length - 1)
+    if (value === " end") {
+        run()
+    } else if (terminal.value.substring(terminal.value.length - 2, terminal.value.length) === "\n>") {
+        terminal.value += " "
     }
 })
 
@@ -49,8 +54,6 @@ function getAllCodeBlocks() {
 function getTextInputCodeBlocks() {
     let codeInput = terminal.value.substring(lastCodeRan.length + 2)
     lastCodeRan = terminal.value + "\n"
-    console.log(lastCodeRan)
-    console.log(codeInput)
     return codeInput.split(" ")
 }
 
@@ -69,6 +72,17 @@ function runCode(codeBlocks) {
     console.log(results)
 }
 
+function getRndInteger(min, max) {
+    return Math.floor(Math.random() * (max - min + 1) ) + min;
+}
+
+function drawCactusPixel(x, y) {
+    ctx.strokeStyle = `rgb(0, ${getRndInteger(200, 232)}, 0)`;
+    ctx.lineWidth = "1";
+    ctx.beginPath();
+    ctx.moveTo(x, y);
+    ctx.lineTo(x + 1, y+1);
+    ctx.stroke();
+}
 
 setupCanvas()
-// setupTerminal()
